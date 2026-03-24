@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawamusic | مركز الموسيقى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;500;700&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --shadow: 0 2px 15px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --success: #27ae60;
+            --gold: #f1c40f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+        }
+
+        .en {
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode header {
+            background: #16213e;
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        body.dark-mode .logo h1 {
+            color: white;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode nav a {
+            color: #e6e6e6;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-switcher button {
+            padding: 5px 15px;
+            margin: 0 2px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .lang-switcher button {
+            background: #16213e;
+            color: white;
+            border-color: #444;
+        }
+
+        .lang-switcher .active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle {
+            color: #f1c40f;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Hero with Large Artistic Image */
+        .hero {
+            padding: 0;
+            height: 85vh;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        body.dark-mode section:not(.hero):not(.lessons) {
+            background-color: #1a1a2e;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        body.dark-mode .section-title h2 {
+            color: #e6e6e6;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+        }
+
+        /* Activities */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        body.dark-mode .activity-card {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .activity-card i {
+            font-size: 45px;
+            color: var(--accent);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .activity-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        body.dark-mode .activity-card h3 {
+            color: #e6e6e6;
+        }
+
+        .activity-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .activity-price {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .book-now {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .book-now:hover {
+            background: #1a252f;
+        }
+
+        /* Lessons */
+        .lessons {
+            background: var(--light);
+        }
+
+        body.dark-mode .lessons {
+            background: #0f3460;
+        }
+
+        .lessons-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: 2px solid var(--primary);
+            background: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .tab-btn {
+            background: #16213e;
+            color: #e6e6e6;
+            border-color: #444;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f8f9fa;
+        }
+
+        body.dark-mode .tab-btn:hover:not(.active) {
+            background: #1a1a2e;
+        }
+
+        .instruments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .instrument {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        body.dark-mode .instrument {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .instrument:hover {
+            transform: translateY(-5px);
+        }
+
+        .instrument i {
+            font-size: 45px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .instrument h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        body.dark-mode .instrument h3 {
+            color: #e6e6e6;
+        }
+
+        .instrument p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .instrument-rating {
+            color: var(--gold);
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .book-lesson {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .book-lesson:hover {
+            background: #2980b9;
+        }
+
+        /* Shop */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .product {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        body.dark-mode .product {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .product-image {
+            background: linear-gradient(45deg, #0f3460, #16213e);
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(44, 62, 80, 0.1), transparent);
+        }
+
+        .product-content {
+            padding: 25px;
+        }
+
+        .product h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        body.dark-mode .product h3 {
+            color: #e6e6e6;
+        }
+
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #1a252f;
+        }
+
+        /* New Features */
+        
+        /* Artists Section */
+        .artists-slider {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--secondary) #f1f1f1;
+        }
+
+        body.dark-mode .artists-slider {
+            scrollbar-color: var(--secondary) #1a1a2e;
+        }
+
+        .artists-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .artists-slider::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        body.dark-mode .artists-slider::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        .artists-slider::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+
+        .artist-card {
+            min-width: 250px;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        body.dark-mode .artist-card {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .artist-image {
+            height: 200px;
+            background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: var(--primary);
+        }
+
+        body.dark-mode .artist-image {
+            background: linear-gradient(45deg, #0f3460, #16213e);
+        }
+
+        .artist-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .artist-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        body.dark-mode .artist-info h3 {
+            color: #e6e6e6;
+        }
+
+        .artist-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .artist-specialty {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        body.dark-mode .blog-card {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            height: 180px;
+            background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary);
+        }
+
+        body.dark-mode .blog-image {
+            background: linear-gradient(45deg, #0f3460, #16213e);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        body.dark-mode .blog-content h3 {
+            color: #e6e6e6;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-excerpt {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Membership */
+        .membership-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .membership-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .membership-card {
+            background: #16213e;
+            border-color: #0f3460;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .membership-card.popular {
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+        }
+
+        .membership-card.popular::before {
+            content: 'الأكثر شعبية';
+            position: absolute;
+            top: 15px;
+            left: -30px;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 5px 40px;
+            transform: rotate(-45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .membership-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        body.dark-mode .membership-card h3 {
+            color: #e6e6e6;
+        }
+
+        .membership-price {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .membership-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .membership-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: right;
+        }
+
+        .membership-features li {
+            padding: 8px 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .membership-features li i {
+            color: var(--success);
+        }
+
+        .join-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .join-button:hover {
+            background: #1a252f;
+        }
+
+        /* Booking Modal */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        body.dark-mode .booking-form {
+            background: #16213e;
+            color: #e6e6e6;
+        }
+
+        .close-booking {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .booking-form h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        body.dark-mode .booking-form h3 {
+            color: #e6e6e6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #1a1a2e;
+            border-color: #444;
+            color: #e6e6e6;
+        }
+
+        .submit-booking {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .submit-booking:hover {
+            background: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        body.dark-mode footer {
+            background: #0f3460;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 25px;
+            color: white;
+            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-text {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info i {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        body.dark-mode .newsletter-form input {
+            background: #1a1a2e;
+            color: #e6e6e6;
+        }
+
+        .newsletter-form button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+                margin-top: 140px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .membership-card.popular {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .activities-grid,
+            .instruments-grid,
+            .products-grid,
+            .blog-grid,
+            .membership-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .activity-card,
+            .instrument,
+            .product-content,
+            .booking-form {
+                padding: 25px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <div>
+                    <h1>Hawamusic</h1>
+                    <p class="ar">مركز الموسيقى | ريد دير، ألبرتا</p>
+                    <p class="en" style="display: none;">Music Center | Red Deer, Alberta</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home" class="ar">الرئيسية</a><a href="#home" class="en" style="display: none;">Home</a></li>
+                    <li><a href="#activities" class="ar">الأنشطة</a><a href="#activities" class="en" style="display: none;">Activities</a></li>
+                    <li><a href="#lessons" class="ar">الدروس</a><a href="#lessons" class="en" style="display: none;">Lessons</a></li>
+                    <li><a href="#artists" class="ar">الفنانين</a><a href="#artists" class="en" style="display: none;">Artists</a></li>
+                    <li><a href="#shop" class="ar">المتجر</a><a href="#shop" class="en" style="display: none;">Shop</a></li>
+                    <li><a href="#blog" class="ar">المدونة</a><a href="#blog" class="en" style="display: none;">Blog</a></li>
+                    <li><a href="#gallery" class="ar">المعرض</a><a href="#gallery" class="en" style="display: none;">Gallery</a></li>
+                    <li><a href="#membership" class="ar">العضوية</a><a href="#membership" class="en" style="display: none;">Membership</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="active" onclick="setLanguage('ar')">العربية</button>
+                    <button onclick="setLanguage('en')">English</button>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Large Artistic Image -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h2 class="ar">مركز هواموزيك للفنون الموسيقية</h2>
+            <h2 class="en" style="display: none;">Hawamusic Center for Musical Arts</h2>
+            
+            <p class="ar">حيث تلتقي الأصالة بالإبداع في قلب ألبرتا. نقدم عالماً من الأنغام والدروس والآلات الموسيقية الفاخرة.</p>
+            <p class="en" style="display: none;">Where authenticity meets creativity in the heart of Alberta. We offer a world of melodies, lessons, and luxury musical instruments.</p>
+            
+            <div class="hero-buttons">
+                <a href="#activities" class="cta-button ar">استكشف عالم الموسيقى</a>
+                <a href="#activities" class="cta-button en" style="display: none;">Explore Music World</a>
+                
+                <a href="#membership" class="cta-button cta-secondary ar">انضم إلينا الآن</a>
+                <a href="#membership" class="cta-button cta-secondary en" style="display: none;">Join Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">عالم الأنشطة الموسيقية</h2>
+                <h2 class="en" style="display: none;">World of Music Activities</h2>
+                <p class="ar">فعاليات حية وبرامج تفاعلية تنبض بالموسيقى والإبداع</p>
+                <p class="en" style="display: none;">Live events and interactive programs pulsating with music and creativity</p>
+            </div>
+            
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-price ar">$49</div>
+                    <div class="activity-price en" style="display: none;">$49</div>
+                    <i class="fas fa-guitar"></i>
+                    <h3 class="ar">حفلات السيمفونية</h3>
+                    <h3 class="en" style="display: none;">Symphony Concerts</h3>
+                    <p class="ar">عروض أسبوعية استثنائية بمشاركة فرق موسيقية عالمية في قاعة مجهزة بأحدث أنظمة الصوت والإضاءة.</p>
+                    <p class="en" style="display: none;">Exceptional weekly performances featuring international musical ensembles in a hall equipped with state-of-the-art sound and lighting systems.</p>
+                    <button class="book-now ar" onclick="openBooking('حفلات السيمفونية', 'activity')">احجز الآن</button>
+                    <button class="book-now en" style="display: none;" onclick="openBooking('Symphony Concerts', 'activity')">Book Now</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-price ar">$89</div>
+                    <div class="activity-price en" style="display: none;">$89</div>
+                    <i class="fas fa-users"></i>
+                    <h3 class="ar">ورش الإبداع الموسيقي</h3>
+                    <h3 class="en" style="display: none;">Music Creativity Workshops</h3>
+                    <p class="ar">ورش عمل مكثفة بإشراف خبراء عالميين تغطي التأليف، التوزيع، وتقنيات العزف المتقدمة.</p>
+                    <p class="en" style="display: none;">Intensive workshops supervised by international experts covering composition, arrangement, and advanced playing techniques.</p>
+                    <button class="book-now ar" onclick="openBooking('ورش الإبداع الموسيقي', 'activity')">احجز الآن</button>
+                    <button class="book-now en" style="display: none;" onclick="openBooking('Music Creativity Workshops', 'activity')">Book Now</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-price ar">$29</div>
+                    <div class="activity-price en" style="display: none;">$29</div>
+                    <i class="fas fa-trophy"></i>
+                    <h3 class="ar">مهرجان المواهب السنوي</h3>
+                    <h3 class="en" style="display: none;">Annual Talent Festival</h3>
+                    <p class="ar">أكبر مسابقة موسيقية في المنطقة مع جوائز قيّمة وفرص احترافية للمواهب الواعدة.</p>
+                    <p class="en" style="display: none;">The largest music competition in the region with valuable prizes and professional opportunities for promising talents.</p>
+                    <button class="book-now ar" onclick="openBooking('مهرجان المواهب السنوي', 'activity')">احجز الآن</button>
+                    <button class="book-now en" style="display: none;" onclick="openBooking('Annual Talent Festival', 'activity')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lessons" id="lessons">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">رحلات التعلم الموسيقية</h2>
+                <h2 class="en" style="display: none;">Musical Learning Journeys</h2>
+                <p class="ar">برامج تعليمية شخصية تغطي جميع الآلات والمستويات</p>
+                <p class="en" style="display: none;">Personalized educational programs covering all instruments and levels</p>
+            </div>
+            
+            <div class="lessons-tabs">
+                <button class="tab-btn active ar" onclick="showTab('eastern')">التراث الشرقي</button>
+                <button class="tab-btn en" style="display: none;" onclick="showTab('eastern')">Eastern Heritage</button>
+                <button class="tab-btn ar" onclick="showTab('western')">الفنون الغربية</button>
+                <button class="tab-btn en" style="display: none;" onclick="showTab('western')">Western Arts</button>
+                <button class="tab-btn ar" onclick="showTab('theory')">النظرية والتأليف</button>
+                <button class="tab-btn en" style="display: none;" onclick="showTab('theory')">Theory & Composition</button>
+            </div>
+            
+            <div class="instruments-grid">
+                <div class="instrument" data-category="eastern">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <i class="fas fa-drum"></i>
+                    <h3 class="ar">فن العود المتقدم</h3>
+                    <h3 class="en" style="display: none;">Advanced Oud Art</h3>
+                    <p class="ar">إتقان العود مع دراسة المقامات والتقاسيم والتوزيع الموسيقي للتراث الشرقي.</p>
+                    <p class="en" style="display: none;">Mastering the oud with study of maqams, taqasim, and musical arrangement for Eastern heritage.</p>
+                    <button class="book-lesson ar" onclick="openBooking('فن العود المتقدم', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Advanced Oud Art', 'lesson')">Book a Lesson</button>
+                </div>
+                
+                <div class="instrument" data-category="eastern">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <i class="fas fa-music"></i>
+                    <h3 class="ar">مدرسة القانون</h3>
+                    <h3 class="en" style="display: none;">Qanun School</h3>
+                    <p class="ar">تعلم القانون من الأساسيات إلى الاحتراف مع التركيز على الزخارف والإيقاعات العربية.</p>
+                    <p class="en" style="display: none;">Learning Qanun from basics to professionalism with focus on Arabic ornaments and rhythms.</p>
+                    <button class="book-lesson ar" onclick="openBooking('مدرسة القانون', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Qanun School', 'lesson')">Book a Lesson</button>
+                </div>
+                
+                <div class="instrument" data-category="western" style="display: none;">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <i class="fas fa-piano"></i>
+                    <h3 class="ar">أكاديمية البيانو</h3>
+                    <h3 class="en" style="display: none;">Piano Academy</h3>
+                    <p class="ar">برنامج شامل يعتمد على المناهج العالمية لتعليم البيانو الكلاسيكي والمعاصر.</p>
+                    <p class="en" style="display: none;">Comprehensive program based on international curricula for teaching classical and contemporary piano.</p>
+                    <button class="book-lesson ar" onclick="openBooking('أكاديمية البيانو', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Piano Academy', 'lesson')">Book a Lesson</button>
+                </div>
+                
+                <div class="instrument" data-category="western" style="display: none;">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <i class="fas fa-guitar"></i>
+                    <h3 class="ar">معهد الجيتار</h3>
+                    <h3 class="en" style="display: none;">Guitar Institute</h3>
+                    <p class="ar">تدريب متكامل على جميع أنواع الجيتار (كلاسيكي، أكوستيك، كهربائي، باص).</p>
+                    <p class="en" style="display: none;">Comprehensive training on all guitar types (classical, acoustic, electric, bass).</p>
+                    <button class="book-lesson ar" onclick="openBooking('معهد الجيتار', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Guitar Institute', 'lesson')">Book a Lesson</button>
+                </div>
+                
+                <div class="instrument" data-category="theory" style="display: none;">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <i class="fas fa-book-open"></i>
+                    <h3 class="ar">مختبر التأليف</h3>
+                    <h3 class="en" style="display: none;">Composition Lab</h3>
+                    <p class="ar">ورش إبداعية متقدمة في التأليف الموسيقي، الهارموني، والترتيب الأوركسترالي.</p>
+                    <p class="en" style="display: none;">Advanced creative workshops in musical composition, harmony, and orchestral arrangement.</p>
+                    <button class="book-lesson ar" onclick="openBooking('مختبر التأليف', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Composition Lab', 'lesson')">Book a Lesson</button>
+                </div>
+                
+                <div class="instrument" data-category="theory" style="display: none;">
+                    <div class="instrument-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <i class="fas fa-sliders-h"></i>
+                    <h3 class="ar">هندسة الصوت</h3>
+                    <h3 class="en" style="display: none;">Sound Engineering</h3>
+                    <p class="ar">تعلم تقنيات التسجيل الصوتي، المكساج، الماسترينغ، والإنتاج الموسيقي الاحترافي.</p>
+                    <p class="en" style="display: none;">Learning audio recording techniques, mixing, mastering, and professional music production.</p>
+                    <button class="book-lesson ar" onclick="openBooking('هندسة الصوت', 'lesson')">احجز درساً</button>
+                    <button class="book-lesson en" style="display: none;" onclick="openBooking('Sound Engineering', 'lesson')">Book a Lesson</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section id="artists">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">فنانون ومعلمو المركز</h2>
+                <h2 class="en" style="display: none;">Center Artists & Instructors</h2>
+                <p class="ar">تعرف على فريقنا من الموسيقيين المحترفين والمعلمين المتميزين</p>
+                <p class="en" style="display: none;">Meet our team of professional musicians and distinguished instructors</p>
+            </div>
+            
+            <div class="artists-slider">
+                <div class="artist-card">
+                    <div class="artist-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="ar">أحمد العودي</h3>
+                        <h3 class="en" style="display: none;">Ahmed Al-Oudi</h3>
+                        <p class="ar">عازف عود محترف مع أكثر من 20 عاماً من الخبرة في التدريس والعزف</p>
+                        <p class="en" style="display: none;">Professional oud player with over 20 years of teaching and performance experience</p>
+                        <span class="artist-specialty ar">العود</span>
+                        <span class="artist-specialty en" style="display: none;">Oud</span>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-image">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="ar">سارة البيانو</h3>
+                        <h3 class="en" style="display: none;">Sarah Piano</h3>
+                        <p class="ar">معلمة بيانو معتمدة من الأكاديمية الملكية للموسيقى في لندن</p>
+                        <p class="en" style="display: none;">Certified piano teacher from the Royal Academy of Music in London</p>
+                        <span class="artist-specialty ar">البيانو</span>
+                        <span class="artist-specialty en" style="display: none;">Piano</span>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-image">
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="ar">موسى القانون</h3>
+                        <h3 class="en" style="display: none;">Mousa Al-Qanun</h3>
+                        <p class="ar">عازف قانون سوري حائز على جوائز عالمية في الموسيقى العربية</p>
+                        <p class="en" style="display: none;">Syrian qanun player award-winning in Arabic music</p>
+                        <span class="artist-specialty ar">القانون</span>
+                        <span class="artist-specialty en" style="display: none;">Qanun</span>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-image">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="ar">لينا الإيقاع</h3>
+                        <h3 class="en" style="display: none;">Lena Al-Iqa</h3>
+                        <p class="ar">خبيرة في الإيقاعات العربية وتقنيات الطبول التقليدية</p>
+                        <p class="en" style="display: none;">Expert in Arabic rhythms and traditional drum techniques</p>
+                        <span class="artist-specialty ar">الإيقاع</span>
+                        <span class="artist-specialty en" style="display: none;">Rhythm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">معرض الآلات الفاخرة</h2>
+                <h2 class="en" style="display: none;">Luxury Instruments Gallery</h2>
+                <p class="ar">آلات موسيقية مختارة بعناية من أفضل الحرفيين حول العالم</p>
+                <p class="en" style="display: none;">Carefully selected musical instruments from the best craftsmen worldwide</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="ar">عود سوري فاخر</h3>
+                        <h3 class="en" style="display: none;">Luxury Syrian Oud</h3>
+                        <p class="product-description ar">عود سوري صناعة يدوية دقيقة، خشب جوز عتيق معتق، صوت دافئ وعميق يناسب المحترفين.</p>
+                        <p class="product-description en" style="display: none;">Precise handcrafted Syrian oud, aged and seasoned walnut wood, warm and deep sound suitable for professionals.</p>
+                        <div class="price">$850</div>
+                        <button class="add-to-cart ar" onclick="addToCart('عود سوري فاخر', 850)">إضافة إلى السلة</button>
+                        <button class="add-to-cart en" style="display: none;" onclick="addToCart('Luxury Syrian Oud', 850)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product">
+                    <div class="product-image">
+                        <i class="fas fa-piano"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="ar">بيانو ياماها الفاخر</h3>
+                        <h3 class="en" style="display: none;">Luxury Yamaha Piano</h3>
+                        <p class="product-description ar">بيانو ياماها كلاڤينوفا، 88 مفتاح، صوت طبيعي، تقنية الصمامات الافتراضية، خشب صلب.</p>
+                        <p class="product-description en" style="display: none;">Yamaha Clavinova piano, 88 keys, natural sound, virtual valve technology, solid wood construction.</p>
+                        <div class="price">$2,500</div>
+                        <button class="add-to-cart ar" onclick="addToCart('بيانو ياماها الفاخر', 2500)">إضافة إلى السلة</button>
+                        <button class="add-to-cart en" style="display: none;" onclick="addToCart('Luxury Yamaha Piano', 2500)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product">
+                    <div class="product-image">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="ar">ناي مصري راقي</h3>
+                        <h3 class="en" style="display: none;">Elegant Egyptian Ney</h3>
+                        <p class="product-description ar">ناي مصري مصنوع من قصب النيل، 9 مفاتيح، يغطي جميع المقامات العربية والإيقاعات.</p>
+                        <p class="product-description en" style="display: none;">Egyptian ney made from Nile reed, 9 keys, covers all Arabic maqams and rhythms.</p>
+                        <div class="price">$180</div>
+                        <button class="add-to-cart ar" onclick="addToCart('ناي مصري راقي', 180)">إضافة إلى السلة</button>
+                        <button class="add-to-cart en" style="display: none;" onclick="addToCart('Elegant Egyptian Ney', 180)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">مدونة الموسيقى</h2>
+                <h2 class="en" style="display: none;">Music Blog</h2>
+                <p class="ar">آخر المقالات والنصائح والأخبار من عالم الموسيقى</p>
+                <p class="en" style="display: none;">Latest articles, tips, and news from the world of music</p>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="ar">كيف تختار الآلة الموسيقية المناسبة لك</h3>
+                        <h3 class="en" style="display: none;">How to Choose the Right Musical Instrument for You</h3>
+                        <div class="blog-meta">
+                            <span class="ar">10 مارس 2026</span>
+                            <span class="en" style="display: none;">March 10, 2026</span>
+                            <span class="ar">بقلم: أحمد الموسيقار</span>
+                            <span class="en" style="display: none;">By: Ahmed Al-Mousiqar</span>
+                        </div>
+                        <p class="blog-excerpt ar">دليل شامل لمساعدتك في اختيار الآلة الموسيقية التي تناسب شخصيتك ومستواك وأهدافك الموسيقية...</p>
+                        <p class="blog-excerpt en" style="display: none;">A comprehensive guide to help you choose the musical instrument that suits your personality, level, and musical goals...</p>
+                        <a href="#" class="read-more ar">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                        <a href="#" class="read-more en" style="display: none;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="ar">أسرار التأليف الموسيقي للهواة</h3>
+                        <h3 class="en" style="display: none;">Secrets of Music Composition for Amateurs</h3>
+                        <div class="blog-meta">
+                            <span class="ar">2 مارس 2026</span>
+                            <span class="en" style="display: none;">March 2, 2026</span>
+                            <span class="ar">بقلم: سارة الملحنة</span>
+                            <span class="en" style="display: none;">By: Sarah Al-Mulahhina</span>
+                        </div>
+                        <p class="blog-excerpt ar">تقنيات ونصائح عملية لبدء رحلة التأليف الموسيقي حتى لو لم تكن محترفاً...</p>
+                        <p class="blog-excerpt en" style="display: none;">Practical techniques and tips to start your music composition journey even if you're not a professional...</p>
+                        <a href="#" class="read-more ar">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                        <a href="#" class="read-more en" style="display: none;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="ar">فوائد تعلم الموسيقى على الصحة العقلية</h3>
+                        <h3 class="en" style="display: none;">Benefits of Learning Music on Mental Health</h3>
+                        <div class="blog-meta">
+                            <span class="ar">25 فبراير 2026</span>
+                            <span class="en" style="display: none;">February 25, 2026</span>
+                            <span class="ar">بقلم: د. ليلى النفسية</span>
+                            <span class="en" style="display: none;">By: Dr. Layla Al-Nafsia</span>
+                        </div>
+                        <p class="blog-excerpt ar">كيف تؤثر الموسيقى إيجاباً على الدماغ وتقلل من التوتر وتحسن المزاج...</p>
+                        <p class="blog-excerpt en" style="display: none;">How music positively affects the brain, reduces stress, and improves mood...</p>
+                        <a href="#" class="read-more ar">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                        <a href="#" class="read-more en" style="display: none;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">معرض الوسائط</h2>
+                <h2 class="en" style="display: none;">Media Gallery</h2>
+                <p class="ar">لحظات من الإبداع والفعاليات والأنشطة في مركزنا</p>
+                <p class="en" style="display: none;">Moments of creativity, events, and activities at our center</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Concert">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Guitar Lesson">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Music Studio">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="DJ Performance">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Orchestra">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1517230878791-4d28214057c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')">
+                    <img src="https://images.unsplash.com/photo-1517230878791-4d28214057c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Recording Studio">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section id="membership">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="ar">خطط العضوية المميزة</h2>
+                <h2 class="en" style="display: none;">Premium Membership Plans</h2>
+                <p class="ar">انضم إلى مجتمعنا الموسيحي واستمتع بمزايا حصرية وخصومات خاصة</p>
+                <p class="en" style="display: none;">Join our musical community and enjoy exclusive benefits and special discounts</p>
+            </div>
+            
+            <div class="membership-tiers">
+                <div class="membership-card">
+                    <h3 class="ar">العضوية الأساسية</h3>
+                    <h3 class="en" style="display: none;">Basic Membership</h3>
+                    <div class="membership-price">$29<span class="ar">/شهرياً</span><span class="en" style="display: none;">/month</span></div>
+                    <ul class="membership-features">
+                        <li><i class="fas fa-check"></i> <span class="ar">دخول مجاني إلى ورش العمل الشهرية</span><span class="en" style="display: none;">Free access to monthly workshops</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">خصم 10% على جميع الدروس</span><span class="en" style="display: none;">10% discount on all lessons</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">دعوات للحفلات الموسيقية</span><span class="en" style="display: none;">Invitations to music concerts</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">نشرة إخبارية أسبوعية</span><span class="en" style="display: none;">Weekly newsletter</span></li>
+                    </ul>
+                    <button class="join-button ar" onclick="joinMembership('basic')">انضم الآن</button>
+                    <button class="join-button en" style="display: none;" onclick="joinMembership('basic')">Join Now</button>
+                </div>
+                
+                <div class="membership-card popular">
+                    <h3 class="ar">العضوية الذهبية</h3>
+                    <h3 class="en" style="display: none;">Gold Membership</h3>
+                    <div class="membership-price">$59<span class="ar">/شهرياً</span><span class="en" style="display: none;">/month</span></div>
+                    <ul class="membership-features">
+                        <li><i class="fas fa-check"></i> <span class="ar">كل مزايا العضوية الأساسية</span><span class="en" style="display: none;">All Basic Membership features</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">خصم 20% على جميع الدروس والمنتجات</span><span class="en" style="display: none;">20% discount on all lessons and products</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">جلسة استشارة موسيقية مجانية شهرياً</span><span class="en" style="display: none;">Free monthly music consultation session</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">دخول مجاني إلى جميع الحفلات</span><span class="en" style="display: none;">Free access to all concerts</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">حجز مجاني لاستوديوهات المركز</span><span class="en" style="display: none;">Free booking of center studios</span></li>
+                    </ul>
+                    <button class="join-button ar" onclick="joinMembership('gold')">انضم الآن</button>
+                    <button class="join-button en" style="display: none;" onclick="joinMembership('gold')">Join Now</button>
+                </div>
+                
+                <div class="membership-card">
+                    <h3 class="ar">العضوية البلاتينية</h3>
+                    <h3 class="en" style="display: none;">Platinum Membership</h3>
+                    <div class="membership-price">$99<span class="ar">/شهرياً</span><span class="en" style="display: none;">/month</span></div>
+                    <ul class="membership-features">
+                        <li><i class="fas fa-check"></i> <span class="ar">كل مزايا العضوية الذهبية</span><span class="en" style="display: none;">All Gold Membership features</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">خصم 30% على جميع الدروس والمنتجات</span><span class="en" style="display: none;">30% discount on all lessons and products</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">جلسات خاصة مع فنانين مشهورين</span><span class="en" style="display: none;">Private sessions with famous artists</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">دروس مجانية في آلة موسيقية من اختيارك</span><span class="en" style="display: none;">Free lessons on a musical instrument of your choice</span></li>
+                        <li><i class="fas fa-check"></i> <span class="ar">دعوات خاصة لفعاليات VIP</span><span class="en" style="display: none;">Special invitations to VIP events</span></li>
+                    </ul>
+                    <button class="join-button ar" onclick="joinMembership('platinum')">انضم الآن</button>
+                    <button class="join-button en" style="display: none;" onclick="joinMembership('platinum')">Join Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hawamusic</h3>
+                    <p class="footer-text ar">واحة الفنون الموسيقية في قلب ألبرتا، حيث يلتقي التراث بالإبداع والمعرفة بالشغف.</p>
+                    <p class="footer-text en" style="display: none;">An oasis of musical arts in the heart of Alberta, where heritage meets creativity and knowledge meets passion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="ar">بوابة التواصل</h3>
+                    <h3 class="en" style="display: none;">Communication Gateway</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> <span class="ar">123 شارع الموسيقى، ريد دير، ألبرتا T4N 0E1</span><span class="en" style="display: none;">123 Music Street, Red Deer, Alberta T4N 0E1</span></li>
+                        <li><i class="fas fa-phone"></i> <span>+1 (403) 555-0198</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>hello@hawamusic.com</span></li>
+                        <li><i class="fas fa-clock"></i> <span class="ar">السبت - الخميس: 10 صباحاً - 10 مساءً</span><span class="en" style="display: none;">Sat - Thu: 10 AM - 10 PM</span></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="ar">النشرة الإخبارية</h3>
+                    <h3 class="en" style="display: none;">Newsletter</h3>
+                    <p class="footer-text ar">ابقَ على اطلاع بآخر الفعاليات والعروض والدروس الجديدة.</p>
+                    <p class="footer-text en" style="display: none;">Stay updated with the latest events, offers, and new lessons.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="البريد الإلكتروني" class="ar" id="newsletter-email">
+                        <input type="email" placeholder="Email Address" class="en" style="display: none;" id="newsletter-email-en">
+                        <button class="ar" onclick="subscribeNewsletter()">اشترك</button>
+                        <button class="en" style="display: none;" onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p class="ar">© 2026 مركز هواموزيك للفنون الموسيقية. كل الحقوق محفوظة.</p>
+                <p class="en" style="display: none;">© 2026 Hawamusic Center for Musical Arts. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-form">
+            <span class="close-booking" onclick="closeBooking()">&times;</span>
+            <h3 class="ar" id="bookingTitle">حجز نشاط موسيقي</h3>
+            <h3 class="en" style="display: none;" id="bookingTitleEn">Music Activity Booking</h3>
+            
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name" class="ar">الاسم الكامل</label>
+                    <label for="name" class="en" style="display: none;">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="ar">البريد الإلكتروني</label>
+                    <label for="email" class="en" style="display: none;">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="ar">رقم الهاتف</label>
+                    <label for="phone" class="en" style="display: none;">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date" class="ar">التاريخ المفضل</label>
+                    <label for="date" class="en" style="display: none;">Preferred Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time" class="ar">الوقت المفضل</label>
+                    <label for="time" class="en" style="display: none;">Preferred Time</label>
+                    <select id="time" required>
+                        <option value="" class="ar">اختر الوقت</option>
+                        <option value="" class="en" style="display: none;">Select Time</option>
+                        <option value="10:00" class="ar">10:00 صباحاً</option>
+                        <option value="10:00" class="en" style="display: none;">10:00 AM</option>
+                        <option value="14:00" class="ar">2:00 بعد الظهر</option>
+                        <option value="14:00" class="en" style="display: none;">2:00 PM</option>
+                        <option value="16:00" class="ar">4:00 بعد الظهر</option>
+                        <option value="16:00" class="en" style="display: none;">4:00 PM</option>
+                        <option value="18:00" class="ar">6:00 مساءً</option>
+                        <option value="18:00" class="en" style="display: none;">6:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="ar">ملاحظات إضافية (اختياري)</label>
+                    <label for="message" class="en" style="display: none;">Additional Notes (Optional)</label>
+                    <textarea id="message" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-booking ar">إرسال طلب الحجز</button>
+                <button type="submit" class="submit-booking en" style="display: none;">Submit Booking Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Language Switching
+        function setLanguage(lang) {
+            // Get the button that was clicked
+            const buttons = document.querySelectorAll('.lang-switcher button');
+            
+            // Update active button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'ar' && btn.textContent === 'العربية') || 
+                    (lang === 'en' && btn.textContent === 'English')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show/Hide Arabic content
+            document.querySelectorAll('.ar').forEach(el => {
+                el.style.display = lang === 'ar' ? 'block' : 'none';
+            });
+            
+            // Show/Hide English content
+            document.querySelectorAll('.en').forEach(el => {
+                el.style.display = lang === 'en' ? 'block' : 'none';
+            });
+            
+            // Update direction
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.className = lang === 'ar' ? '' : 'en';
+            
+            // Reset tabs to eastern
+            showTab('eastern');
+            
+            // Save language preference
+            localStorage.setItem('hawamusic-language', lang);
+        }
+        
+        // Tab Switching for Lessons
+        function showTab(category) {
+            // Update tab buttons based on current language
+            const isArabic = document.body.dir === 'rtl';
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                
+                // Check which tab button corresponds to the selected category
+                const btnText = btn.textContent.trim();
+                
+                if (isArabic) {
+                    if ((category === 'eastern' && btnText.includes('التراث')) ||
+                        (category === 'western' && btnText.includes('الفنون')) ||
+                        (category === 'theory' && btnText.includes('النظرية'))) {
+                        btn.classList.add('active');
+                    }
+                } else {
+                    if ((category === 'eastern' && btnText.includes('Eastern')) ||
+                        (category === 'western' && btnText.includes('Western')) ||
+                        (category === 'theory' && btnText.includes('Theory'))) {
+                        btn.classList.add('active');
+                    }
+                }
+            });
+            
+            // Show/Hide instruments
+            document.querySelectorAll('.instrument').forEach(instrument => {
+                if (instrument.dataset.category === category) {
+                    instrument.style.display = 'block';
+                } else {
+                    instrument.style.display = 'none';
+                }
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .cta-button').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if(targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Add to Cart functionality
+        function addToCart(productName, price) {
+            const language = document.body.dir === 'rtl' ? 'ar' : 'en';
+            const cart = JSON.parse(localStorage.getItem('hawamusic-cart') || '[]');
+            
+            cart.push({name: productName, price: price});
+            localStorage.setItem('hawamusic-cart', JSON.stringify(cart));
+            
+            if(language === 'ar') {
+                alert(`تم إضافة ${productName} إلى سلة التسوق`);
+            } else {
+                alert(`${productName} added to cart`);
+            }
+        }
+        
+        // Newsletter subscription
+        function subscribeNewsletter() {
+            const language = document.body.dir === 'rtl' ? 'ar' : 'en';
+            const emailField = language === 'ar' ? document.getElementById('newsletter-email') : document.getElementById('newsletter-email-en');
+            const email = emailField.value;
+            
+            if(!email || !email.includes('@')) {
+                if(language === 'ar') {
+                    alert('الرجاء إدخال بريد إلكتروني صحيح');
+                } else {
+                    alert('Please enter a valid email address');
+                }
+                return;
+            }
+            
+            // Save subscription
+            const subscribers = JSON.parse(localStorage.getItem('hawamusic-subscribers') || '[]');
+            subscribers.push(email);
+            localStorage.setItem('hawamusic-subscribers', JSON.stringify(subscribers));
+            
+            // Clear field
+            emailField.value = '';
+            
+            if(language === 'ar') {
+                alert(`شكراً لك! سيصلك النشرة على ${email}`);
+            } else {
+                alert(`Thank you! Newsletter will be sent to ${email}`);
+            }
+        }
+        
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeIcon = document.querySelector('.theme-toggle i');
+            
+            if(document.body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('hawamusic-theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('hawamusic-theme', 'light');
+            }
+        }
+        
+        // Gallery Modal
+        function openModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // Booking Modal
+        let currentBookingType = '';
+        let currentItemName = '';
+        
+        function openBooking(itemName, type) {
+            currentBookingType = type;
+            currentItemName = itemName;
+            
+            const language = document.body.dir === 'rtl' ? 'ar' : 'en';
+            
+            if(language === 'ar') {
+                document.getElementById('bookingTitle').textContent = `حجز ${itemName}`;
+            } else {
+                document.getElementById('bookingTitleEn').textContent = `Booking ${itemName}`;
+            }
+            
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+        
+        function closeBooking() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.getElementById('bookingForm').reset();
+        }
+        
+        // Handle booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const language = document.body.dir === 'rtl' ? 'ar' : 'en';
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            // Save booking
+            const bookings = JSON.parse(localStorage.getItem('hawamusic-bookings') || '[]');
+            bookings.push({
+                name: name,
+                email: email,
+                date: date,
+                time: time,
+                type: currentBookingType,
+                item: currentItemName,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('hawamusic-bookings', JSON.stringify(bookings));
+            
+            // Close modal
+            closeBooking();
+            
+            if(language === 'ar') {
+                alert(`تم استلام طلب حجز ${currentItemName} بنجاح! سنتصل بك خلال 24 ساعة لتأكيد الحجز.`);
+            } else {
+                alert(`Booking request for ${currentItemName} received successfully! We will contact you within 24 hours to confirm.`);
+            }
+        });
+        
+        // Membership join function
+        function joinMembership(plan) {
+            const language = document.body.dir === 'rtl' ? 'ar' : 'en';
+            const planNames = {
+                basic: language === 'ar' ? 'العضوية الأساسية' : 'Basic Membership',
+                gold: language === 'ar' ? 'العضوية الذهبية' : 'Gold Membership',
+                platinum: language === 'ar' ? 'العضوية البلاتينية' : 'Platinum Membership'
+            };
+            
+            if(language === 'ar') {
+                const confirmJoin = confirm(`هل ترغب في الانضمام إلى ${planNames[plan]}؟`);
+                if(confirmJoin) {
+                    alert(`تهانينا! لقد انضممت إلى ${planNames[plan]}. سيتصل بك فريقنا خلال 24 ساعة لإكمال عملية الاشتراك.`);
+                }
+            } else {
+                const confirmJoin = confirm(`Do you want to join ${planNames[plan]}?`);
+                if(confirmJoin) {
+                    alert(`Congratulations! You have joined ${planNames[plan]}. Our team will contact you within 24 hours to complete the subscription process.`);
+                }
+            }
+        }
+        
+        // Initialize with saved preferences
+        window.onload = function() {
+            // Load language preference
+            const savedLanguage = localStorage.getItem('hawamusic-language') || 'ar';
+            setLanguage(savedLanguage);
+            
+            // Load theme preference
+            const savedTheme = localStorage.getItem('hawamusic-theme') || 'light';
+            if(savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+            }
+            
+            // Initialize tabs
+            showTab('eastern');
+            
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections and cards
+            document.querySelectorAll('section, .activity-card, .instrument, .product, .artist-card, .blog-card, .membership-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                const imageModal = document.getElementById('imageModal');
+                const bookingModal = document.getElementById('bookingModal');
+                
+                if(e.target === imageModal) {
+                    closeModal();
+                }
+                
+                if(e.target === bookingModal) {
+                    closeBooking();
+                }
+            });
+            
+            // Add keyboard support for modals
+            document.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape') {
+                    closeModal();
+                    closeBooking();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
